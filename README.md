@@ -101,6 +101,7 @@ const completion = await openai.chat.completions.create({
 // Handle streaming response...
 ```
 
+<<<<<<< HEAD
 ## Real AI Integration
 
 This chatbot now supports integration with OpenAI's API to provide real AI responses. To set it up:
@@ -122,6 +123,8 @@ This chatbot now supports integration with OpenAI's API to provide real AI respo
 
 For more detailed instructions, see [openai-setup.md](./openai-setup.md).
 
+=======
+>>>>>>> 15b2d467b25932c55c04292c5c3b4cb10f88a185
 ## Features to Add
 
 - User authentication
