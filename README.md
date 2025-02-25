@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Modern AI Chatbot
 
-## Getting Started
+A responsive, feature-rich AI chatbot interface built with Next.js and Tailwind CSS. This project provides a modern user experience similar to world-class AI assistants like ChatGPT, Qwen, and Mistral.
 
-First, run the development server:
+![AI Chatbot Preview](./public/chatbot-preview.png)
+
+## Features
+
+- ✨ **Modern UI** - Clean, responsive design following modern design principles
+- 🌓 **Dark/Light Mode** - Toggle between dark and light themes
+- ⚡ **Real-time Streaming** - Character-by-character streaming text responses
+- 📱 **Mobile Responsive** - Works seamlessly on desktop and mobile devices
+- 🧠 **Simulated AI Responses** - Easily extendable to connect to real AI APIs
+- 💬 **Chat History** - View your conversation history
+- 🔄 **New Chat Function** - Start fresh conversations
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) - React framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [React Icons](https://react-icons.github.io/react-icons/) - Icon library
+- Web Streams API - For streaming text responses
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+cd my-chatbot
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+my-chatbot/
+├── public/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── chat/
+│   │   │       └── route.js      # API endpoint for chat
+│   │   ├── dashboard/
+│   │   │   └── page.js           # Main chat interface
+│   │   ├── globals.css           # Global styles
+│   │   └── layout.js            
+├── tailwind.config.js            # Tailwind configuration
+└── package.json
+```
 
-## Learn More
+## Customization
 
-To learn more about Next.js, take a look at the following resources:
+### Adding New AI Responses
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To add new topic responses, edit the `generateResponse` function in `/src/app/api/chat/route.js`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```javascript
+function generateResponse(prompt) {
+  const lowerPrompt = prompt.toLowerCase();
+  
+  if (lowerPrompt.includes('new topic')) {
+    return `Your detailed response about the new topic...`;
+  } 
+  // ...existing topics...
+}
+```
 
-## Deploy on Vercel
+### Connecting to a Real AI API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To connect to a real AI service (like OpenAI, Claude, etc.), modify the API route:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```javascript
+// Example with OpenAI (requires installing openai package)
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+// In your POST function:
+const completion = await openai.chat.completions.create({
+  model: "gpt-3.5-turbo",
+  messages: [{ role: "user", content: prompt }],
+  stream: true,
+});
+
+// Handle streaming response...
+```
+
+## Features to Add
+
+- User authentication
+- Persistent chat history
+- File uploads
+- Code highlighting
+- Voice input/output
+- More UI themes
+
+## License
+
+[MIT](LICENSE)
+
+## Acknowledgements
+
+- Inspired by leading AI chat interfaces
+- Built with Next.js App Router
